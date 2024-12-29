@@ -1,4 +1,4 @@
-name: CI/CD pipeline for Ubuntu vm
+name: CI/CD pipeline for Ubuntu VM
 
 on:
   push:
@@ -18,11 +18,8 @@ jobs:
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY}}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Deploy to Ubuntu VM
         run: |
           ssh -o StrictHostKeyChecking=no sagar@192.168.15.156 "cd /projects && git pull origin main && ./deploy_script.sh"
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      
-      
